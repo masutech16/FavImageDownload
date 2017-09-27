@@ -3,6 +3,9 @@ package FavImageDownload;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Masaki on 2017/09/26.
  */
@@ -19,22 +22,31 @@ public class TwitterWrapper {
         TwitterFactory tf = new TwitterFactory(cb.build());
         twitter = tf.getInstance();
     }
-    //TODO: 画像の受け渡し方を調べる
-    //ふぁぼしたツイートの中で最も新しいツイートについている画像を返す。
-    //四枚付いている可能性もあるので配列で返したいところ。
-    public String getRecentImages() {
-        //開発中
-        return "";
-    }
 
-    private ResponseList<Status> getFavTweet() {
+    //多めに取得するようにする
+    private List<Status> getFavTweetWithImages() {
+        ResponseList<Status> favs = null;
         try {
-            ResponseList<Status> favs = twitter.getFavorites();
-            return favs;
+            favs = twitter.getFavorites();
         } catch(TwitterException te) {
             te.printStackTrace();
             System.exit(1);
         }
-        return null;
+        List<Status> statuses = new ArrayList<Status>();
+        for(Status tweet : favs) {
+            System.out.println(tweet.getText());
+            if(tweet.getMediaEntities().length != 0) {
+                statuses.add(tweet);
+            }
+        }
+        return statuses;
+    }
+
+
+    //画像データの配列を返すメソッド
+    //形式が不明なのでとりあえずvoidで置いておきます。今度調べます
+    public void getImages() {
+        List<Status> imageStatuses = getFavTweetWithImages();
+        //Statusの中から画像をとり出して送る。
     }
 }
