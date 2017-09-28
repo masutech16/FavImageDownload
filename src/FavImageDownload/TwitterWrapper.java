@@ -34,7 +34,6 @@ public class TwitterWrapper {
         }
         List<Status> statuses = new ArrayList<Status>();
         for(Status tweet : favs) {
-            System.out.println(tweet.getText());
             if(tweet.getMediaEntities().length != 0) {
                 statuses.add(tweet);
             }
@@ -43,10 +42,17 @@ public class TwitterWrapper {
     }
 
 
-    //画像データの配列を返すメソッド
-    //形式が不明なのでとりあえずvoidで置いておきます。今度調べます
-    public void getImages() {
+    //画像データがあるURLをListで返します
+    public List<String> getImageURLs() {
         List<Status> imageStatuses = getFavTweetWithImages();
         //Statusの中から画像をとり出して送る。
+        List<String> urls = new ArrayList<String>();
+        for(Status tw : imageStatuses) {
+            MediaEntity[] rowImages = tw.getMediaEntities();
+            for(MediaEntity me : rowImages) {
+               urls.add(me.getMediaURL());
+            }
+        }
+        return urls;
     }
 }
