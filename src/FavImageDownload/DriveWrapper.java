@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static jdk.nashorn.internal.runtime.regexp.joni.Syntax.Java;
 
 /**
  * Created by Masaki on 2017/09/29.

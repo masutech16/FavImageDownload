@@ -13,29 +13,37 @@ import java.net.URLConnection;
  */
 public class GetImage {
 
-    private URL url;
-    private BufferedImage bi = null;
-    private URLConnection urlcon;
 
-    public GetImage(String url) {
+    //URL先の画像のbufferdImageを返す
+    public static BufferedImage getBufferedImageFrom(String urlText) {
+        URL url = null;
         try {
-            this.url = new URL(url);
+            url = new URL(urlText);
         } catch (MalformedURLException e) {
+            System.out.println("URLの形式が不正です");
+            return null;
+        }
+        try {
+            URLConnection urlcon = url.openConnection();
+            return ImageIO.read(urlcon.getInputStream());
+        } catch (IOException e) {
+            System.out.println( url.toString() + "との接続中に問題が発生しました");
             e.printStackTrace();
-            System.exit(1);
+            return null;
         }
     }
 
-    //所持しているURL先の画像を所定の場所に保存する
-    //urlを引数にとって静的メソッド化するのはあり
-    private void convertToImage() {
+    public static void storeImage(BufferedImage rowImage, String filepath) {
+        storeImage(rowImage, new File(filepath));
+    }
+
+    //TODO: 拡張子にどう対応するかを考えておく
+    public static void storeImage(BufferedImage rowImage, File file) {
         try {
-            urlcon = url.openConnection();
-            bi = ImageIO.read(urlcon.getInputStream());
-            File saveFile = new File(Settings.storeFilePath);
-            ImageIO.write(bi,"jpg",saveFile);
+            ImageIO.write(rowImage, "jpg", file);
         } catch (IOException e) {
-            System.out.println( url.toString() + "との接続中に問題が発生しました");
+            System.out.println("書き込み中にエラーが発生しました");
+            e.printStackTrace();
         }
     }
 }
