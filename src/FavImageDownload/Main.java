@@ -16,9 +16,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         //twitterへのログイン
-        TwitterWrapper twitterWrapper = new TwitterWrapper();
-        List<String> po = twitterWrapper.getImageURLs();
-        //new DriveWrapper();
+//        TwitterWrapper twitterWrapper = new TwitterWrapper();
+//        List<String> po = twitterWrapper.getImageURLs();
+        new DriveWrapper();
     }
 
 
