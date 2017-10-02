@@ -1,5 +1,6 @@
 package FavImageDownload;
 
+import com.google.api.services.drive.Drive;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
@@ -18,8 +19,7 @@ public class Main {
         //twitterへのログイン
 //        TwitterWrapper twitterWrapper = new TwitterWrapper();
 //        List<String> po = twitterWrapper.getImageURLs();
-        new DriveWrapper();
+        DriveWrapper driveWrapper = new DriveWrapper();
+        driveWrapper.storeImage(new java.io.File(Settings.storeFilePath));
     }
-
-
 }
