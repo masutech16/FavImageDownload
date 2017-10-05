@@ -22,6 +22,7 @@ public class DownloadImage {
 
     //TODO: 拡張子にどう対応するかを考えておく
     //filePathを返すのはなんか変かもしれない
+    //imageの情報を持つクラスを生成してしまうのはあり
     public String storeImage(String urlText) {
         try {
             String fileUri = storeFolderPath + "\\" + urlText;
