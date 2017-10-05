@@ -23,10 +23,10 @@ public class Main {
         IFileDownload fileUploader = new DriveWrapper();
         //TODO: ファイルの保存名をどうにかしたい
 //        for(String url : ImageUrls) {
-//            String storeUri = Settings.storeFilePath + "\\po.jpg";
-//            GetImage.storeImage(url, storeUri);
+//            DownloadImage downloadImage = new DownloadImage()
+//                    .setStoreFilePath(Settings.storeFilePath);
+//            String storeUri = downloadImage.storeImage(url);
 //            fileUploader.uploadImage(storeUri);
-//
 //        }
         fileUploader.uploadImage(new java.io.File(Settings.storeFilePath + "\\po.jpg"));
     }
