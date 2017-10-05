@@ -25,15 +25,15 @@ public class TwitterWrapper {
 
     //多めに取得するようにする
     private List<Status> getFavTweetWithImages() {
-        ResponseList<Status> favs = null;
+        ResponseList<Status> favoritedTweets = null;
         try {
-            favs = twitter.getFavorites();
+            favoritedTweets = twitter.getFavorites();
         } catch(TwitterException te) {
             te.printStackTrace();
             System.exit(1);
         }
         List<Status> statuses = new ArrayList<Status>();
-        for(Status tweet : favs) {
+        for(Status tweet : favoritedTweets) {
             if(tweet.getMediaEntities().length != 0) {
                 statuses.add(tweet);
             }
@@ -41,9 +41,11 @@ public class TwitterWrapper {
         return statuses;
     }
 
+    //最新のツイートがこれ欲しいとかだったら、直近のRTした画像を保存する。
+
 
     //画像データがあるURLをListで返します
-    public List<String> getImageURLs() {
+    public List<String> getImageURLsFromFav() {
         List<Status> imageStatuses = getFavTweetWithImages();
         //Statusの中から画像をとり出して送る。
         List<String> urls = new ArrayList<String>();
