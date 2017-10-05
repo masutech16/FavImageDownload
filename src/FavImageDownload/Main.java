@@ -1,6 +1,7 @@
 package FavImageDownload;
 
 import com.google.api.services.drive.Drive;
+import com.sun.xml.internal.ws.api.config.management.policy.ManagementAssertion;
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
 
@@ -18,8 +19,15 @@ public class Main {
     public static void main(String[] args) throws IOException {
         //twitterへのログイン
 //        TwitterWrapper twitterWrapper = new TwitterWrapper();
-//        List<String> po = twitterWrapper.getImageURLsFromFav();
+//        List<String> ImageUrls = twitterWrapper.getImageURLsFromFav();
         IFileDownload fileUploader = new DriveWrapper();
-        fileUploader.uploadImage(new java.io.File(Settings.storeFilePath));
+        //TODO: ファイルの保存名をどうにかしたい
+//        for(String url : ImageUrls) {
+//            String storeUri = Settings.storeFilePath + "\\po.jpg";
+//            GetImage.storeImage(url, storeUri);
+//            fileUploader.uploadImage(storeUri);
+//
+//        }
+        fileUploader.uploadImage(new java.io.File(Settings.storeFilePath + "\\po.jpg"));
     }
 }

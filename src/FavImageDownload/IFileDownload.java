@@ -8,4 +8,6 @@ import java.io.File;
 public interface IFileDownload
 {
     public void uploadImage(File file);
+
+    public void uploadImage(String storeUri);
 }

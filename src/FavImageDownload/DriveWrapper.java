@@ -44,6 +44,11 @@ public class DriveWrapper implements IFileDownload {
     }
 
     @Override
+    public void uploadImage(String storeUri) {
+        uploadImage(new java.io.File(storeUri));
+    }
+
+    @Override
     public void uploadImage(java.io.File file) {
         File parent = new File().setTitle("dir")
                 .setMimeType("application/vnd.google-apps.folder"); //driveのREST API参照

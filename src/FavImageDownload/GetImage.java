@@ -33,12 +33,13 @@ public class GetImage {
         }
     }
 
-    public static void storeImage(BufferedImage rowImage, String filepath) {
-        storeImage(rowImage, new File(filepath));
+    public static void storeImage(String urlText, String filepath) {
+        storeImage(urlText, new File(filepath));
     }
 
     //TODO: 拡張子にどう対応するかを考えておく
-    public static void storeImage(BufferedImage rowImage, File file) {
+    public static void storeImage(String urlText, File file) {
+        BufferedImage rowImage = getBufferedImageFrom(urlText);
         try {
             ImageIO.write(rowImage, "jpg", file);
         } catch (IOException e) {
