@@ -19,7 +19,7 @@ public class Main {
         //twitterへのログイン
 //        TwitterWrapper twitterWrapper = new TwitterWrapper();
 //        List<String> po = twitterWrapper.getImageURLs();
-        DriveWrapper driveWrapper = new DriveWrapper();
-        driveWrapper.storeImage(new java.io.File(Settings.storeFilePath));
+        IFileDownload fileUploader = new DriveWrapper();
+        fileUploader.uploadImage(new java.io.File(Settings.storeFilePath));
     }
 }

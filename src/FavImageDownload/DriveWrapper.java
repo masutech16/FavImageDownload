@@ -21,7 +21,7 @@ import java.util.Arrays;
 /**
  * Created by Masaki on 2017/09/29.
  */
-public class DriveWrapper {
+public class DriveWrapper implements IFileDownload {
 
     private Drive drive;
 
@@ -43,7 +43,8 @@ public class DriveWrapper {
                 .setApplicationName("FavImageDownload").build();
     }
 
-    public void storeImage(java.io.File file) {
+    @Override
+    public void uploadImage(java.io.File file) {
         File parent = new File().setTitle("dir")
                 .setMimeType("application/vnd.google-apps.folder"); //driveのREST API参照
         File metaData = new File().setTitle("test")
