@@ -41,27 +41,21 @@ public class DriveWrapper implements IFileUpload {
     }
 
     @Override
-    public void uploadImage(String storeUri) {
-        uploadImage(new java.io.File(storeUri));
-    }
-
-    @Override
-    public void uploadImage(java.io.File file) {
+    //FIXME:毎回ディレクトリが作成されてしまう
+    public void uploadImage(Image image) {
         try {
-            //ディレクトリの作成
-            File parent = new File().setTitle("dir")
-                    .setMimeType("application/vnd.google-apps.folder"); //driveのREST API参照
+            File parent = new File().setTitle("test")
+                    .setMimeType("application/vnd.google-apps.folder");
             parent = drive.files().insert(parent).execute();
 
-            //ファイルのメタデータなどを作成・送信
-            File metaData = new File().setTitle("test")
+            File metaData = new File().setTitle(image.getTitle())
+                    .setMimeType("application/vnd.google-apps.photo")
                     .setParents(Arrays.asList(new ParentReference().setId(parent.getId())));
-            FileContent mediaContent = new FileContent(null,file);
+            FileContent mediaContent = new FileContent(null,image.getFile());
             drive.files().insert(metaData,mediaContent).execute();
         } catch (Exception e) {
             System.out.println("driveの書き込み中にエラーが発生しました");
             e.printStackTrace();
         }
     }
-
 }

@@ -20,16 +20,15 @@ public class DownloadImage {
         return this;
     }
 
-    //TODO: 拡張子にどう対応するかを考えておく
-    //filePathを返すのはなんか変かもしれない
-    //imageの情報を持つクラスを生成してしまうのはあり
-    public String storeImage(String urlText) {
+    public Image storeImage(String urlText) {
         try {
-            String fileUri = storeFolderPath + "\\" + urlText;
-            File file = new File(fileUri);
+            Image image = new Image().setInfoFromUrl(urlText);
+            String storeUri = Settings.storeFilePath + "\\" + image.getTitle() + "." + image.getExtension();
+            image.setFilePath(storeUri);
+            File file = new File(storeUri);
             BufferedImage rowImage = getBufferedImageFrom(urlText);
-            ImageIO.write(rowImage, "jpg", file);
-            return fileUri;
+            ImageIO.write(rowImage, image.getExtension(), file);
+            return image;
         } catch (MalformedURLException mue) {
             System.out.println("URLの形式が不正です");
             mue.printStackTrace();
@@ -43,8 +42,8 @@ public class DownloadImage {
 
     private static BufferedImage getBufferedImageFrom(String urlText) throws Exception {
         URL url = new URL(urlText);
-        URLConnection urlcon = url.openConnection();
-        return ImageIO.read(urlcon.getInputStream());
+        URLConnection urlConnection = url.openConnection();
+        return ImageIO.read(urlConnection.getInputStream());
     }
 
 }

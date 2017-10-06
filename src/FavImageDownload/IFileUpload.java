@@ -7,7 +7,5 @@ import java.io.File;
  */
 public interface IFileUpload
 {
-    public void uploadImage(File file);
-
-    public void uploadImage(String storeUri);
+    public void uploadImage(Image image);
 }
