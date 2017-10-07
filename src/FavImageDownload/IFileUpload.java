@@ -6,5 +6,5 @@ package FavImageDownload;
  */
 public interface IFileUpload
 {
-    public void uploadImage(Image image);
+    public void uploadImage(IImage image);
 }

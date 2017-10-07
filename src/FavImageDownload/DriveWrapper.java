@@ -42,7 +42,11 @@ public class DriveWrapper implements IFileUpload {
 
     @Override
     //FIXME:毎回ディレクトリが作成されてしまう
-    public void uploadImage(Image image) {
+    public void uploadImage(IImage image) {
+        if(!(image.exist())) {
+            System.out.println("指定されたファイルは存在しません");
+            return;
+        }
         try {
             File parent = new File().setTitle("test")
                     .setMimeType("application/vnd.google-apps.folder");
@@ -51,7 +55,7 @@ public class DriveWrapper implements IFileUpload {
             File metaData = new File().setTitle(image.getTitle())
                     .setMimeType("application/vnd.google-apps.photo")
                     .setParents(Arrays.asList(new ParentReference().setId(parent.getId())));
-            FileContent mediaContent = new FileContent(null,image.getFile());
+            FileContent mediaContent = new FileContent(null, image.getFile());
             drive.files().insert(metaData,mediaContent).execute();
         } catch (Exception e) {
             System.out.println("driveの書き込み中にエラーが発生しました");

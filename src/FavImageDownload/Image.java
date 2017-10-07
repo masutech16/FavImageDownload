@@ -5,7 +5,7 @@ import java.io.File;
 /**
  * Created by Masaki on 2017/10/06.
  */
-public class Image {
+public class Image implements IImage {
     private String title;
     private String extension;
     private File file;
@@ -32,14 +32,23 @@ public class Image {
         return this;
     }
 
+    @Override
+    public boolean exist() {
+        return file.canRead();
+    }
+
+
+    @Override
     public String getTitle() {
         return title;
     }
 
+    @Override
     public  String getExtension() {
         return extension;
     }
 
+    @Override
     public File getFile() {
         return file;
     }
