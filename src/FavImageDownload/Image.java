@@ -20,13 +20,6 @@ public class Image implements IImage {
         return this;
     }
 
-    public Image setInfoFromUrl(String url) {
-        String[] str = url.split("/");
-        String[] po = str[str.length -1].split("\\.");
-        return this.setTitle(po[0])
-                .setExtension(po[1]);
-    }
-
     public Image setFilePath(String path) {
         this.file = new File(path);
         return this;
